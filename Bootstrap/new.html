@@ -1,0 +1,174 @@
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</head>
+
+<body>
+    <nav>
+        <div class="nav-wrapper">
+            <a href="#" class="brand-logo"></a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href="sass.html"></a></li>
+                <li><a href="badges.html"></a></li>
+                <li><a href="collapsible.html"></a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div id="Page1">
+        <div class="Signup">
+            <div class="container">
+                <div class="row">
+                    <div class="col s12">
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <input  id="first_name" type="text" class="validate">
+                                <label for="first_name">First Name</label>
+                              </div>
+                            <div class="input-field col s6">
+                                <input id="last_name" type="text" name="last name" class="validate" />
+                                <label for="last_name">Last Name</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input id="email" type="email" name="email" class="validate" />
+                                <label for="email">Email</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input id="password" type="password" name="Password" class="validate" />
+                                <label for="password">Password</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input id="confirm_password" type="password" name="confirm_password" class="validate" />
+                                <label for="password">Confirm Password</label>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="waves-effect waves-light btn btn-large" type="submit"
+                        onclick="formValidation()">Submit</button>
+                    <button class="waves-effect waves-light btn btn-large" type="submit"
+                        onclick="return show('Page2','Page1');">Login</button>
+                </div>
+                <p id="error-msg"></p>
+            </div>
+        </div>
+    </div>
+    </div>
+    <div id="Page2" style="display:none">
+        <div class="Login">
+            <div id="button" class="container">
+                <div class="row">
+                    <div class="col s12">
+                        <div class="row">
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <input id="Lemail" type="email" name="email" class="validate" />
+                                    <label for="email">Email</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <input id="Lpassword" type="password" name="Password" class="validate" />
+                                    <label for="password">Password</label>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="waves-effect waves-light btn btn-large" type="submit"
+                        onclick="LoginValidation()">Submit</button>
+                        <button class="waves-effect waves-light btn btn-large" type="submit"
+                            onclick="return show('Page1','Page2');">Signup</button>
+                    </div>
+                    <p id="error-message"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    function show(shown, hidden) {
+        document.getElementById(shown).style.display = 'block';
+        document.getElementById(hidden).style.display = 'none';
+        return false;
+    }
+
+    const regexObject = {
+        name: new RegExp('^[a-zA-Z]{2,}$'),
+        email: new RegExp(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/),
+        password: new RegExp(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/)
+
+    }
+    const formValidation = () => {
+
+        const errorP = document.getElementById('error-msg')
+        errorP.innerHTML = ''
+
+        const firstName = document.getElementById('first_name').value
+        const lastName = document.getElementById('last_name').value
+        const email = document.getElementById('email').value
+        const password = document.getElementById('password').value
+        const confirm_password = document.getElementById('confirm_password').value
+
+        if (!regexObject.name.test(firstName)) {
+            errorP.innerHTML = '<h6>Invalid first name</h6>'
+            return;
+        }
+        else if (!regexObject.name.test(lastName)) {
+            errorP.innerHTML = '<h6>Invalid last name</h6>'
+            return;
+        }
+        else if (!regexObject.email.test(email)) {
+            errorP.innerHTML = '<h6>Invalid email</h6>'
+            return;
+        }
+        else if (!regexObject.password.test(password)) {
+            errorP.innerHTML = '<h6>Invalid password</h6>'
+            return;
+        }
+        else if (!regexObject.password.test(confirm_password)) {
+            errorP.innerHTML = '<h6>Invalid confirm password</h6>'
+            return;
+        } else if (password != confirm_password) {
+            errorP.innerHTMl = '<h6>password & confirm is not same</h6>'
+            return;
+        } else {
+            errorP.innerHTML = '<h6>Okay</h6>'
+        }
+    }
+
+    const LoginValidation = () => {
+
+        const errorL = document.getElementById('error-message')
+        errorL.innerHTML = ''
+
+        const Lemail = document.getElementByIdbyId('Lemail').value
+        const Lpassword = document.getElementById('Lpassword').value
+
+        if (!regexObject.email.test(Lemail)) {
+            errorL.innerHTML = '<h6>Invalid email</h6>'
+            return;
+        }
+        else if (!regexObject.password.test(Lpassword)) {
+            errorL.innerHTML = '<h6>Invalid confirm password</h6>'
+            return;
+        } else {
+            errorL.innerText('Okay')
+        }
+    }
+
+</script>
+
+</html>
